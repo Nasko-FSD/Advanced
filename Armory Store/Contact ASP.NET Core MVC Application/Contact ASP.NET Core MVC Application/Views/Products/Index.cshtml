@@ -1,0 +1,17 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h1 class="text-center">Our Products</h1>
+<br />
+
+<div class="row">
+    @foreach (var image in Model)
+    {
+        <div class="col-md-4 text-center mb-4">
+            <img src="~/images/allProducts/@image" class="img-fluid" alt="@image" />
+        </div>
+    }
+</div>
