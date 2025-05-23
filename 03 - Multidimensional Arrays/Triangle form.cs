@@ -1,0 +1,42 @@
+﻿int height = int.Parse(Console.ReadLine());
+long[][] triangle = new long[height][];
+int currentWidth = 1;
+
+for (long row = 0; row < height; row++)
+{
+    triangle[row] = new long[currentWidth];
+
+    long[] currentRow = triangle[row];
+
+    currentRow[0] = 1;
+
+    currentRow[currentRow.Length - 1] = 1;
+
+    currentWidth++;
+
+    if (currentRow.Length > 2)
+    {
+        for (int i = 1; i < currentRow.Length - 1; i++)
+        {
+            long[] previousRow = triangle[row - 1];
+
+            long previousRowSum = previousRow[i] + previousRow[i - 1];
+
+            currentRow[i] = previousRowSum;
+        }
+    }
+}
+
+int lastRowLength = string.Join(" ", triangle[height - 1]).Length;
+
+foreach (var row in triangle)
+{
+    string currentRowText = string.Join(" ", row);
+
+    int diff = lastRowLength - currentRowText.Length;
+    int halfDiff = diff / 2;
+
+    string whiteSpace = new string(' ', halfDiff);
+
+    Console.WriteLine($"{whiteSpace}{currentRowText}");
+}
